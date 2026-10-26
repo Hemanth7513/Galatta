@@ -1,0 +1,18 @@
+{
+  "short_name": "GALATTA",
+  "name": "GALATTA // Neo-Arcade Coin-Op",
+  "description": "Retro Indian Cinema Arcade featuring Bomma movie riddles, Turbo Trivia, Reflex Grid, and Versus Duel.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#05050d",
+  "theme_color": "#ff0055",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}

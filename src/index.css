@@ -1,0 +1,406 @@
+/* ==========================================================================
+   GALATTA // RETRO ARCADE DESIGN SYSTEM (VANILLA CSS)
+   ========================================================================== */
+
+:root {
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-crt: 'VT323', monospace;
+  --font-marquee: 'Orbitron', sans-serif;
+  --font-ui: 'Outfit', sans-serif;
+
+  --neon-cyan: #00f3ff;
+  --neon-pink: #ff0055;
+  --neon-yellow: #ffe600;
+  --neon-green: #39ff14;
+  --neon-purple: #bc13fe;
+  --neon-orange: #ff7700;
+  
+  --bg-deep: #05050d;
+  --bg-cabinet: #0c0c1a;
+  --bg-panel: #131326;
+  --bg-panel-dark: #090914;
+
+  --border-cabinet: #242442;
+  --border-neon-cyan: rgba(0, 243, 255, 0.4);
+  --border-neon-pink: rgba(255, 0, 85, 0.4);
+  
+  --glow-cyan: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 25px rgba(0, 243, 255, 0.25);
+  --glow-pink: 0 0 10px rgba(255, 0, 85, 0.5), 0 0 25px rgba(255, 0, 85, 0.25);
+  --glow-yellow: 0 0 10px rgba(255, 230, 0, 0.5), 0 0 20px rgba(255, 230, 0, 0.25);
+  --glow-green: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.25);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: #e2e8f0;
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(188, 19, 254, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(255, 0, 85, 0.08) 0%, transparent 50%),
+    linear-gradient(rgba(10, 10, 25, 0.9) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 25, 0.9) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  background-position: center, center, center, center center, center center;
+}
+
+/* ==========================================================================
+   CRT MONITOR SCANLINE & PHOSPHOR SHADER EFFECT
+   ========================================================================== */
+.crt-active {
+  position: relative;
+}
+
+.crt-active::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 9999;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+.crt-active::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.65) 100%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Sub-pixel scanlines vignette */
+@keyframes flicker {
+  0% { opacity: 0.985; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY UTILITIES
+   ========================================================================== */
+.font-pixel {
+  font-family: var(--font-pixel);
+  letter-spacing: -0.5px;
+}
+
+.font-crt {
+  font-family: var(--font-crt);
+  letter-spacing: 1px;
+}
+
+.font-marquee {
+  font-family: var(--font-marquee);
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+/* Neon Text Glows */
+.neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 6px var(--neon-cyan), 0 0 16px rgba(0, 243, 255, 0.6);
+}
+
+.neon-text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 6px var(--neon-pink), 0 0 16px rgba(255, 0, 85, 0.6);
+}
+
+.neon-text-yellow {
+  color: var(--neon-yellow);
+  text-shadow: 0 0 6px var(--neon-yellow), 0 0 16px rgba(255, 230, 0, 0.6);
+}
+
+.neon-text-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green), 0 0 16px rgba(57, 255, 20, 0.6);
+}
+
+/* Neon Border Glows */
+.neon-box-cyan {
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.35), inset 0 0 12px rgba(0, 243, 255, 0.15);
+}
+
+.neon-box-pink {
+  border: 2px solid var(--neon-pink);
+  box-shadow: 0 0 12px rgba(255, 0, 85, 0.35), inset 0 0 12px rgba(255, 0, 85, 0.15);
+}
+
+.neon-box-yellow {
+  border: 2px solid var(--neon-yellow);
+  box-shadow: 0 0 12px rgba(255, 230, 0, 0.35), inset 0 0 12px rgba(255, 230, 0, 0.15);
+}
+
+/* ==========================================================================
+   ARCADE BUTTONS & CONTROLS
+   ========================================================================== */
+.arcade-btn {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border: 2px solid;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  text-decoration: none;
+}
+
+.arcade-btn:active {
+  transform: translateY(3px) scale(0.98);
+}
+
+.arcade-btn-primary {
+  background: linear-gradient(180deg, #ff0055 0%, #aa0038 100%);
+  border-color: #ff6699;
+  color: #fff;
+  box-shadow: 0 4px 0 #660022, 0 0 15px rgba(255, 0, 85, 0.5);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+.arcade-btn-primary:active {
+  box-shadow: 0 1px 0 #660022;
+}
+
+.arcade-btn-cyan {
+  background: linear-gradient(180deg, #00f3ff 0%, #008fa6 100%);
+  border-color: #8affff;
+  color: #050510;
+  box-shadow: 0 4px 0 #00505d, 0 0 15px rgba(0, 243, 255, 0.5);
+  font-weight: 800;
+}
+
+.arcade-btn-cyan:active {
+  box-shadow: 0 1px 0 #00505d;
+}
+
+.arcade-btn-yellow {
+  background: linear-gradient(180deg, #ffe600 0%, #b3a100 100%);
+  border-color: #fff480;
+  color: #050510;
+  box-shadow: 0 4px 0 #665c00, 0 0 15px rgba(255, 230, 0, 0.5);
+  font-weight: 800;
+}
+
+.arcade-btn-yellow:active {
+  box-shadow: 0 1px 0 #665c00;
+}
+
+.arcade-btn-dark {
+  background: linear-gradient(180deg, #1d1d36 0%, #0e0e1d 100%);
+  border-color: #3b3b68;
+  color: #e2e8f0;
+  box-shadow: 0 4px 0 #07070f;
+}
+
+.arcade-btn-dark:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.arcade-btn-dark:active {
+  box-shadow: 0 1px 0 #07070f;
+}
+
+/* Retro Insert Coin Blinking Button */
+@keyframes coinBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.35; }
+}
+
+.insert-coin-blink {
+  animation: coinBlink 1.1s infinite;
+}
+
+/* ==========================================================================
+   ARCADE CABINET MARQUEE CHASSIS
+   ========================================================================== */
+.arcade-marquee-header {
+  background: linear-gradient(180deg, #181830 0%, #0c0c1b 60%, #06060f 100%);
+  border-bottom: 4px solid #ff0055;
+  box-shadow: 0 4px 25px rgba(255, 0, 85, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 50;
+}
+
+.marquee-chaser {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background: #080812;
+  border-bottom: 1px solid #1a1a36;
+}
+
+.bulb {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2b2b4d;
+  transition: all 0.3s;
+}
+
+.bulb.active-cyan {
+  background: #00f3ff;
+  box-shadow: 0 0 8px #00f3ff;
+}
+
+.bulb.active-pink {
+  background: #ff0055;
+  box-shadow: 0 0 8px #ff0055;
+}
+
+.bulb.active-yellow {
+  background: #ffe600;
+  box-shadow: 0 0 8px #ffe600;
+}
+
+/* ==========================================================================
+   SEGMENTED LED BARS & GAUGES
+   ========================================================================== */
+.segmented-meter {
+  display: flex;
+  gap: 3px;
+  background: #080812;
+  padding: 4px;
+  border-radius: 4px;
+  border: 2px solid #20203a;
+}
+
+.meter-segment {
+  flex: 1;
+  height: 14px;
+  background: #19192e;
+  border-radius: 2px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.meter-segment.lit-danger {
+  background: #ff0055;
+  box-shadow: 0 0 6px #ff0055;
+}
+
+.meter-segment.lit-warning {
+  background: #ff7700;
+  box-shadow: 0 0 6px #ff7700;
+}
+
+.meter-segment.lit-good {
+  background: #ffe600;
+  box-shadow: 0 0 6px #ffe600;
+}
+
+.meter-segment.lit-hyped {
+  background: #00f3ff;
+  box-shadow: 0 0 8px #00f3ff;
+}
+
+/* ==========================================================================
+   ARCADE CABINET CARD
+   ========================================================================== */
+.arcade-card {
+  background: linear-gradient(145deg, #121226 0%, #0a0a16 100%);
+  border: 2px solid var(--border-cabinet);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s, box-shadow 0.2s;
+}
+
+.arcade-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8), 0 0 18px rgba(0, 243, 255, 0.25);
+}
+
+.arcade-card-pink:hover {
+  border-color: var(--neon-pink);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8), 0 0 18px rgba(255, 0, 85, 0.25);
+}
+
+.arcade-card-yellow:hover {
+  border-color: var(--neon-yellow);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8), 0 0 18px rgba(255, 230, 0, 0.25);
+}
+
+.arcade-card-green:hover {
+  border-color: var(--neon-green);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8), 0 0 18px rgba(57, 255, 20, 0.25);
+}
+
+/* ==========================================================================
+   SCROLLBAR & UTILITY
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070712;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232344;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* Animations */
+@keyframes arcadePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.arcade-pulse {
+  animation: arcadePulse 1.8s infinite;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: #070712;
+  border-top: 1px solid #1a1a32;
+  border-bottom: 1px solid #1a1a32;
+  padding: 4px 0;
+  white-space: nowrap;
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marqueeScroll 25s linear infinite;
+}

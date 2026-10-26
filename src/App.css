@@ -1,0 +1,82 @@
+/* App specific layout utilities */
+.arcade-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+.pixel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.pixel-badge-cyan {
+  background: rgba(0, 243, 255, 0.15);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.pixel-badge-pink {
+  background: rgba(255, 0, 85, 0.15);
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.pixel-badge-yellow {
+  background: rgba(255, 230, 0, 0.15);
+  border: 1px solid var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+
+.pixel-badge-green {
+  background: rgba(57, 255, 20, 0.15);
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+}
+
+.arcade-input {
+  background: #06060f;
+  border: 2px solid #282848;
+  color: #fff;
+  font-family: var(--font-crt);
+  font-size: 20px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.arcade-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+
+/* Modal Overlay */
+.arcade-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 2, 8, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.arcade-modal {
+  background: #0e0e1e;
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.35);
+  border-radius: 12px;
+  max-width: 520px;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+}
